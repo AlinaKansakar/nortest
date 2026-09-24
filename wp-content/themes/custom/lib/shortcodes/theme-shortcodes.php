@@ -158,7 +158,7 @@ function qobrix_user_folders_shortcode_function($args) {
 	}
 
 	$args['documents'] = $documents;
-
+	
 	return qobrix_get_template_html(
 		'qobrix-folders',
 		[

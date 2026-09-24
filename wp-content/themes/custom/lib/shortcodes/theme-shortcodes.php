@@ -330,3 +330,53 @@ function qobrix_client_menu_shortcode_function() {
 }
 
 add_shortcode( 'qobrix_client_menu', 'qobrix_client_menu_shortcode_function' );
+
+/**
+ * User document folders shortcode.
+ *
+ * Example 1: [qobrix_user_folders]
+ *
+ * @param array $args The arguments.
+ * @return string field value or empty string on failure.
+ */
+function qobrix_user_folders_shortcode_function($args) {
+	if (!is_user_logged_in()) {
+		return '';
+	}
+
+	$args = shortcode_atts(
+		[
+			'title' => 'My Documents',
+		],
+		$args
+	);
+
+	$documents = [];
+
+	if (isset($_GET['project_id'])) {
+		$project_id = intval($_GET['project_id']);
+		$project = get_post($project_id);
+
+		if ($project && in_array(get_current_user_id(), get_field('user', $project->ID))) {
+			$documents = qobrix_get_project_documents($project);
+		}
+	} else {
+		$projects = qobrix_get_user_projects();
+
+		foreach ($projects as $project) {
+			$project_documents = qobrix_get_project_documents($project);
+			$documents = array_merge($documents, $project_documents);
+		}
+	}
+
+	$args['documents'] = $documents;
+
+	return qobrix_get_template_html(
+		'qobrix-folders',
+		[
+			'atts' => $args,
+		]
+	);
+}
+
+add_shortcode('qobrix_user_folders', 'qobrix_user_folders_shortcode_function');

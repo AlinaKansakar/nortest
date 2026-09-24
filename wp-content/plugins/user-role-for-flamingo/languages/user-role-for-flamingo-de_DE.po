@@ -1,0 +1,241 @@
+# Copyright (C) 2022 User Role for Flamingo
+# This file is distributed under the same license as the User Role for Flamingo package.
+msgid ""
+msgstr ""
+"Project-Id-Version: User Role for Flamingo 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/user-role-for-"
+"flamingo\n"
+"POT-Creation-Date: 2022-10-24 22:12:11+00:00\n"
+"PO-Revision-Date: 2022-10-25 00:14+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2\n"
+
+#: admin/class-ur4f-settings.php:15
+msgid "User Role For Flamingo - Capabilities"
+msgstr "Rolle für Flamingo - Berechtigungen"
+
+#: admin/class-ur4f-settings.php:16
+msgid "Flamingo User Role"
+msgstr "Flamingo Benutzerrolle"
+
+#: admin/class-ur4f-settings.php:38
+msgid "Settings Saved"
+msgstr "Einstellungen gespeichert"
+
+#: admin/class-ur4f-settings.php:51
+msgid "Save Settings"
+msgstr "Einstellungen speichern"
+
+#: admin/class-ur4f-settings.php:65
+msgid "Contact Capabilities"
+msgstr "Berechtigungen für Kontakte"
+
+#: admin/class-ur4f-settings.php:73
+msgid "Inbound Message Capabilities"
+msgstr "Berechtigungen für eingehende Nachrichten"
+
+#: admin/class-ur4f-settings.php:81
+msgid "Outbound Message Capabilities"
+msgstr "Berechtigungen für ausgehende Nachrichten"
+
+#: admin/class-ur4f-settings.php:92
+msgid "Show Contact List"
+msgstr "Kontaktübersicht anzeigen"
+
+#: admin/class-ur4f-settings.php:99
+msgid ""
+"Shows the admin menu item for contacts and allows access to the "
+"corresponding contacts page to show all contacts."
+msgstr ""
+"Zeigt den Admin-Menüpunkt für Kontakte an und ermöglicht den Zugriff auf die "
+"entsprechende Kontaktseite, um alle Kontakte anzuzeigen."
+
+#: admin/class-ur4f-settings.php:104
+msgid "Edit Contact"
+msgstr "Kontakt bearbeiten"
+
+#: admin/class-ur4f-settings.php:111
+msgid ""
+"Allows to access the edit contact screen and actually editing the contact. "
+"Contacts can still be deleted depending on the \"Delete Contact\" "
+"capability. Only applies when access to \"Show Contact List\" is granted."
+msgstr ""
+"Erlaubt Zugriff auf den Screen zum Bearbeiten von Kontakten und das "
+"eigentliche Ändern eines Kontakts. Kontakte können trotzdem gelöscht werden, "
+"dies hängt von der „Kontakt löschen“ Berechtigung ab. Nur relevant, wenn die "
+"Berechtigung „Kontaktübersicht anzeigen“ erteilt wurde."
+
+#: admin/class-ur4f-settings.php:116
+msgid "Delete Contact"
+msgstr "Kontakt löschen"
+
+#: admin/class-ur4f-settings.php:123
+msgid ""
+"Allows to delete a single contact or multiple contacts at once. Only applies "
+"when access to \"Show Contact List\" is granted. In addition, this "
+"capability allows users with corresponding rights to delete contacts via the "
+"WP privacy personal data erasers."
+msgstr ""
+"Erlaubt, einen einzelnen Kontakt oder mehrere Kontakte gleichzeitig zu "
+"löschen. Nur relevant, wenn die Berechtigung für „Kontaktübersicht anzeigen“ "
+"erteilt wurde. Außerdem erlaubt diese Berechtigung Benutzern mit "
+"entsprechenden Berechtigungen zum Ausführen der WordPress-Funktion "
+"„Personenbezogene Daten löschen“ Kontakte zu löschen."
+
+#: admin/class-ur4f-settings.php:130
+msgid "Show Inbound Messages"
+msgstr "Übersicht für eingehende Nachrichten anzeigen"
+
+#: admin/class-ur4f-settings.php:137
+msgid ""
+"Shows the admin menu item for inbound messages and allows access to the "
+"corresponding messages page to show all inbound messages."
+msgstr ""
+"Zeigt den Admin-Menüpunkt für eingehende Nachrichten an und ermöglicht den "
+"Zugriff auf die entsprechende Seite, um alle eingehenden Nachrichten "
+"anzuzeigen."
+
+#: admin/class-ur4f-settings.php:142
+msgid "Edit Inbound Message"
+msgstr "Eingehende Nachricht bearbeiten"
+
+#: admin/class-ur4f-settings.php:149
+msgid ""
+"Allows access to the edit screen for a single inbound message. There is "
+"nothing to edit besides the Spam/No Spam attribute, which works also, if "
+"\"Spam Inbound Message\" or \"Unspam Inbound Message\" are not granted. Only "
+"applies when access to \"Show Inbound Messages\" is granted."
+msgstr ""
+"Erlaubt Zugriff auf den Screen zum Bearbeiten von eingehenden Nachrichten. "
+"Dort gibt es nichts zu bearbeiten außer dem Setzen des Spam/Kein Spam "
+"Attributs, welches an dieser Stelle auch gesetzt werden kann, obwohl "
+"„Eingehende Nachricht als Spam markieren“ oder „Eingehende Nachricht als "
+"kein Spam markieren“ nicht erlaubt sind. Nur relevant, wenn die Berechtigung "
+"„Übersicht für eingehende Nachrichten anzeigen“ erteilt wurde."
+
+#: admin/class-ur4f-settings.php:154
+msgid "Delete Inbound Message"
+msgstr "Eingehende Nachricht löschen"
+
+#: admin/class-ur4f-settings.php:161
+msgid ""
+"Allows to trash a single inbound message or multiple inbound messages at "
+"once from the list screen and the edit screen. When there are items in the "
+"trash, the trash page can be accessed even without this capability. Only "
+"applies when access to \"Show Inbound Messages\" is granted. In addition, "
+"this capability allows users with corresponding rights to delete inbound "
+"messages via the WP privacy personal data erasers."
+msgstr ""
+"Erlaubt, eine einzelne eingehende Nachricht oder mehrere eingehende "
+"Nachrichten gleichzeitig vom Übersichts-Screen und dem Bearbeiten-Screen zu "
+"löschen. Wenn es Nachrichten im Papierkorb gibt, kann trotzdem auf den "
+"Papierkorb zugegriffen werden, auch ohne diese Berechtigung. Nur relevant, "
+"wenn die Berechtigung für „Übersicht für eingehende Nachrichten“ erteilt "
+"wurde. Außerdem erlaubt diese Berechtigung Benutzern mit entsprechenden "
+"Berechtigungen zum Ausführen der WordPress-Funktion „Personenbezogene Daten "
+"löschen“ eingehende Nachrichten zu löschen."
+
+#: admin/class-ur4f-settings.php:166
+msgid "Show \"Empty Trash\" Button for Inbound Messages"
+msgstr "Button „Papierkorb leeren“ für eingehende Nachrichten anzeigen"
+
+#: admin/class-ur4f-settings.php:173
+msgid ""
+"Shows the \"Empty Trash\" Button on the trash page. It depends on the "
+"\"Delete Inbound Message\" capability, if inbound messages can actually be "
+"permanently deleted. Only applies when access to \"Show Inbound Messages\" "
+"is granted."
+msgstr ""
+"Zeigt den „Papierkorb leeren“ Button im Papierkorb an. Es kommt auf die "
+"Berechtigung „Eingehende Nachricht löschen“ an, ob eingehende Nachrichten "
+"wirklich permanent gelöscht werden können. Nur relevant, wenn die "
+"Berechtigung für „Übersicht für eingehende Nachrichten“ erteilt wurde."
+
+#: admin/class-ur4f-settings.php:178
+msgid "Spam Inbound Message"
+msgstr "Eingehende Nachricht als Spam markieren"
+
+#: admin/class-ur4f-settings.php:185
+msgid ""
+"Allows user to spam a single inbound message or multiple inbound messages at "
+"once from the overview screens. Caution: Permission for spamming and "
+"unspamming a single inbound message from the edit inbound message screen is "
+"always granted."
+msgstr ""
+"Erlaubt Benutzern, eine einzelne eingehende Nachricht oder mehrere "
+"eingehende Nachrichten gleichzeitig vom Übersichts-Screen als Spam zu "
+"markieren. Achtung: Eine eingehende Nachricht kann unabhängig von dieser "
+"Berechtigung vom „Nachricht bearbeiten“-Screen jederzeit als Spam/kein Spam "
+"markiert werden."
+
+#: admin/class-ur4f-settings.php:190
+msgid "Unspam Inbound Message"
+msgstr "Eingehende Nachricht als kein Spam markieren"
+
+#: admin/class-ur4f-settings.php:197
+msgid ""
+"Allows user to unspam a single inbound message or multiple inbound messages "
+"at once from the overview screens. Caution: Permission for spamming and "
+"unspamming a single inbound message from the edit inbound message screen is "
+"always granted."
+msgstr ""
+"Erlaubt Benutzern, eine einzelne eingehende Nachricht oder mehrere "
+"eingehende Nachrichten gleichzeitig vom Übersichts-Screen als kein Spam zu "
+"markieren. Achtung: Eine eingehende Nachricht kann unabhängig von dieser "
+"Berechtigung vom „Nachricht bearbeiten“-Screen jederzeit als Spam/kein Spam "
+"markiert werden."
+
+#: admin/class-ur4f-settings.php:218
+msgid "Edit Outbound Message"
+msgstr "Ausgehende Nachricht bearbeiten"
+
+#: admin/class-ur4f-settings.php:225
+msgid "Allows user to edit outbound messages."
+msgstr "Erlaubt Benutzern, ausgehende Nachrichten zu bearbeiten."
+
+#: admin/class-ur4f-settings.php:230
+msgid "Delete Outbound Message"
+msgstr "Ausgehende Nachricht löschen"
+
+#: admin/class-ur4f-settings.php:237
+msgid ""
+"Allows user to delete a single outbound message or multiple outbound "
+"messages. Shows the \"Empty Trash\" button on the trash screen. When there "
+"are items in the trash, the trash page can be accessed even without this "
+"capability."
+msgstr ""
+"Erlaubt Benutzern, eine einzelne ausgehende Nachricht oder mehrere "
+"ausgehende Nachrichten gleichzeitig zu löschen. Zeigt den „Papierkorb "
+"leeren“-Button im Papierkorb an. Wenn es Nachrichten im Papierkorb gibt, "
+"kann trotzdem auf den Papierkorb zugegriffen werden, auch ohne diese "
+"Berechtigung."
+
+#. Plugin Name of the plugin/theme
+msgid "User Role for Flamingo"
+msgstr "Benutzerrolle für Flamingo"
+
+#. Description of the plugin/theme
+msgid ""
+"Configure special user role to access the flamingo contacts and messages "
+"wihtout admin permissions."
+msgstr ""
+"Konfiguriere eine spezielle Benutzerrolle, um Benutzern Zugriff auf Kontakte "
+"und Nachrichten zu geben, ohne sie zu Administratoren zu machen."
+
+#. Author of the plugin/theme
+msgid "Yannick Zipf"
+msgstr "Yannick Zipf"
+
+#~ msgid ""
+#~ "Allows to delete a single contact or multiple contacts at once. Only "
+#~ "applies when access to \"Show Contact List\" is granted."
+#~ msgstr ""
+#~ "Erlaubt, einen einzelnen Kontakt oder mehrere Kontakte gleichzeitig zu "
+#~ "löschen. Nur relevant, wenn die Berechtigung „Kontaktübersicht anzeigen“ "
+#~ "erteilt wurde."

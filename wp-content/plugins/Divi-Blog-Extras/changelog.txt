@@ -1,0 +1,333 @@
+== Changelog ==
+
+= 2.7.0 =
+Release date: 5th April 2024
+- NEW: List layout.
+- NEW: Non masonry Vertical Grid layout.
+- NEW: Control for 'Use Post Excerpt'.
+- NEW: Control to make specific category active during page load.
+- NEW: Control for filterable category order.
+
+= 2.6.6 =
+Release date: 31st January 2024
+- FIXED: Plugin was failing to install on latest WP v6.4.3.
+
+= 2.6.5 =
+Release date: 5th December 2022
+- NEW: Control for 'Post for Current Page' when used in the theme builder.
+- NEW: Added an option for order by comment count.
+- NEW: Added thumbnail option for featured image size.
+- FIXED: Category Filter on mobile was hidden behind posts.
+- FIXED: Blog posts were not visible on archive pages in few cases.
+- FIXED: Category and Author link was not working in case of Full Width layout.
+- IMPROVEMENT: Added page parameter in the url on ajax pagination.
+
+= 2.6.4 =
+Release date: 6th December 2021
+- NEW: Allowed few html tags in 'the_title' filter.
+- FIXED: 'NOTICE' Required parameter $render_slug follows optional parameter $content.
+- IMPROVEMENT: Support for newly added icons by Divi.
+
+= 2.6.3 =
+Release date: 20th August 2021
+- FIXED: Posts were not visible after Divi v4.10 update. 
+- FIXED: Posts were not visible when came from filter and animation.
+- IMPROVEMENT: Compatible with Divi v4.10.
+
+= 2.6.2 =
+Release date: 03rd June 2021
+- FIXED: Control to disable hamburger filterable categories on tablet and mobile was not visible is few cases.
+- IMPROVEMENT: Added class to exclude images from lazy load.
+
+= 2.6.1 =
+Release date: 28th April 2021
+- NEW: More number of columns support.
+- NEW: Numbered pagination design controls.
+- NEW: Current Taxonomies Relation control for Include Current Taxonomies Posts.
+
+= 2.6.0 =
+Release date: 20th April 2021
+- NEW: 4 Slider layouts.
+- NEW: 1 Masonry layout.
+- NEW: Control to Include Posts by ID.
+- NEW: Control to Exclude Posts by ID.
+- NEW: Control for Link target.
+- NEW: Control for column spacing in masonry layouts.
+- NEW: Responsive control for number of columns in masonry layouts.
+- NEW: Control for scroll to top animation for ajax load more, numbered pagination and filterable categories under Animation toggle.
+- NEW: Control to disable hamburger filterable categories on tablet and mobile under Elements toggle.
+- FIXED: Jetpack lazyload images.
+- FIXED: User defined excerpt was still coming when excerpt length set to 0.
+- IMPROVEMENT: Layout toggle is moved under Content tab.
+- IMPROVEMENT: Content toggle is renamed to Query.
+- IMPROVEMENT: Improved update mechanism.
+
+= 2.5.5 =
+Release date: 29th December 2020
+- FIXED: Notice 'Undefined index: taxonomies_relation'.
+
+= 2.5.4 =
+Release date: 24th December 2020
+- NEW: Control for taxonomies relation(OR, AND).
+- NEW: Control for 'All Posts' filter.
+- NEW: Control for Loader color.
+- NEW: Control for 'No Results' text.
+- FIXED: Filterable menu was not getting closed on clicking a category on mobile devices.
+- FIXED: Scroll to top on clicking filters or pagination links.
+
+= 2.5.3 =
+Release date: 27th August 2020
+- FIXED: Pagination and Filter stopped working on the frontend on Divi, Extra v4.6.
+- FIXED: Pagination was not working correctly with the Filterable Blog.
+- FIXED: Word Count not working properly on some languages.
+
+= 2.5.2 =
+Release date: 5th August 2020
+- NEW: Control of custom text for read time.
+- NEW: Imagesloaded support for masonry.
+- FIXED: 'Notice: Undefined variable: $output'.
+- FIXED: 'Notice: Undefined variable: $pagination on visual builder'.
+- FIXED: 'Notice: Undefined index: 'blog_custom_posts' on visual builder'.
+
+= 2.5.1 =
+Release date: 2nd August 2020
+- NEW: Control for Category Filterable Blog.
+- NEW: Control for ignore sticky posts.
+- FIXED: CSS fixes for EXTRA theme.
+- FIXED: Image loading issue when jetpack lazy load image is enabled.
+
+= 2.5.0 =
+Release date: 1st May 2020
+- FIXED: Pagination was not working on post.
+- FIXED: Post data was not resetting.
+- NEW: Added New layout 'Masonry'.
+- NEW: Added 'offset' feature in widget.
+- NEW: Added 'Current Taxonomy Posts' feature.
+- NEW: Added support for Search results page.
+
+
+= 2.4.1 =
+Release date: 8th April 2020
+- FIXED: Notice 'Undefined index: offset'.
+- FIXED: Notice 'Undefined variable: category_background'.
+- FIXED: Notice 'Undefined variable: module_id'.
+- FIXED: Notice 'Undefined variable: module_class'.
+- FIXED: Notice 'add_shortcode was called incorrectly'.
+
+= 2.4.0 =
+Release date: 31st March 2020
+- FIXED: Pagination not working on category pages when module used in theme builder.
+- FIXED: Image upload issue in wrong directory.
+- IMPROVEMENT: Numbered pagination post load method.
+- IMPROVEMENT: Code Optimisation.
+- IMPROVEMENT: Minor CSS fixes.
+
+= 2.3.2 =
+Release date: 27th Dec 2019
+- NEW: Post Date styling options for 'Full Width' layout.
+- FIXED: Ajax pagination 'Show Few' button not working.
+- FIXED: Ajax pagination button styling option.
+- FIXED: 'Read More' button not rendering on ajax pagination load more.
+- IMPROVEMENT: Minor CSS fixes.
+
+= 2.3.1 =
+Release date: 18th Dec 2019
+- FIXED: Undefined index category_color__hover & category_background_color__hover notice.
+
+= 2.3.0 =
+Release date: 18th Dec 2019
+- NEW: Compatible with Visual Builder.
+- NEW: Added link option settings.
+- NEW: Added button for 'Read More'.
+- IMPROVEMENT: Removed Google+ share icon from classic layout.
+- IMPROVEMENT: Improved hover color options for category.
+- IMPROVEMENT: Excluded WPML 'translation_priority' taxonomy and Divi/Extra 'et_post_format' taxonomy which was displaying on front-end.
+- FIXED: Fixed the 'builder-bundle.js' error.
+- FIXED: Fixed 'Undefined variable i' notice on panel page.
+
+= 2.2.3 =
+Release date: 12th September 2019
+- FIXED: Fixed repetition of posts on load more ajax pagination.
+- FIXED: Fixed coming of random posts on load more ajax pagination.
+
+= 2.2.2 =
+Release date: 9th September 2019
+- FIXED: Fixed Order settings in the module.
+- FIXED: Fixed Orderby settings in the module.
+
+= 2.2.1 = 
+Release date: 20th August 2019
+- FIXED: Excluded yoast prominent keyword's taxonomy which was displaying on front-end.
+- FIXED: Excluded post tag taxonomy which was displaying on front-end.
+
+= 2.2.0 = 
+Release date: 17th August 2019
+- NEW: Added Custom Post Type support feature.
+- NEW: Added Custom Taxonomies support feature.
+- NEW: Added Custom Taxonomies archive support feature.
+
+= 2.1.9 = 
+Release date: 22nd April 2019
+- FIXED: Fixed the warning 'Use of undefined constant is_author'.
+
+= 2.1.8 = 
+Release date: 18th April 2019
+- FIXED: Minor bug fixes.
+
+= 2.1.7 = 
+Release date: 18th April 2019
+- NEW: Added control for overlay color of Block Extended layout.
+- NEW: Added control for featured image size.
+- NEW: Added post read time meta.
+- NEW: Added Tag archive support feature.
+- NEW: Added Author archive support feature.
+- NEW: Added Date archive support feature.
+- FIXED: Fixed Header Level on load more.
+
+= 2.1.6 = 
+Release date: 20th November 2018
+- FIXED: Fixed filesystem for multisite.
+- FIXED: Fixed Archive Page Layout.
+
+= 2.1.5 = 
+Release date: 19th November 2018
+- NEW: Added Category archive support feature.
+
+= 2.1.4 = 
+Release date: 15th November 2018
+- NEW: Added Post Widget feature.
+- FIXED: Replaced deprecated functions with new divi functions.
+
+= 2.1.3 = 
+Release date: 25th October 2018
+- NEW: Added Featured image display control for mobile devices within module settings(Show Featured Image).
+- IMPROVEMENT: Enhance code for setting up default module values.
+- FIXED: Compatibility issue with the latest version of Divi.
+- FIXED: Added security patch for addressing an XSS vulnerability.
+
+= 2.1.2 = 
+Release date: 17th August 2018
+Fixed numbered pagination.
+Added support for WP-PageNavi.
+
+= 2.1.1 = 
+Release date: 1st June 2018
+Fixed compatibility issues with older versions of Divi.
+Fixed 'Call to undefined function et_pb_process_font_icon' error.
+Fixed post meta visibility control settings.
+Minor CSS Fixes.
+
+= 2.1.0 = 
+Release date: 24th April 2018
+Compatibility with Divi 3.1.1.
+Enable partial support for visual builder.
+Optimized CSS & JS according to new Divi standard.
+Setup new folder structure for plugin according to the new Divi standard.
+Fixed category color picker.
+Fixed dynamic post heading issue. 
+
+= 2.0.15 = 
+Release date: 9th April 2018
+Fixed undefined variable alttext error in full width background layout.
+
+= 2.0.14 = 
+Release date: 6th April 2018
+Fixed default pagination setting.
+Fixed Sidebar breaking issue.
+
+= 2.0.13 = 
+Release date: 5th April 2018
+Added Orderby option.
+Added Numbered pagination option.
+Added Compatibility for di-basis theme.
+Image Optimization.
+Fixed Private posts visibility issues.
+Minor CSS fixes.
+
+= 2.0.12 =
+Release date: 26th Feb 2018
+Fixed missing js file error.
+Fixed error in the js file.
+Fixed 'undefined ajax_pagination_button' error.
+Added template(only layout files) overriding feature.
+
+= 2.0.11 =
+Release date: 19th Dec 2017
+Added image alt attribute.
+Fixed category link issue.
+Fixed Load More button for different browsers.
+Added Compatibility to latest version of Divi(3.0.92), Extra & Builder.
+Minor CSS fixes.
+
+= 2.0.10 =
+Release date: 14th Nov 2017
+Added support for Extra theme. 
+Added support for Divi Builder.
+Added control for formatting the load more button.
+Fixed Undefined Offset error.
+
+= 2.0.9 =
+Release date: 19th Sep 2017
+Changed load more button styling on click.
+Improved Offset feature while post number is -1.
+Hide excerpt when excerpt length is 0.
+Added ability to assign different color to different category.
+Added animation control of single post.
+Added background options.
+Compatibility with Divi version(3.0.75).
+Minor CSS Fixes.
+Fixed JS for ajax loading.
+
+= 2.0.8 =
+Release date: 18th Aug 2017
+Addition of offset feature.
+Addition of sort post by date.
+Ability to change show less button text.
+Addition of ellipsis at the end of excerpt.
+Some CSS Fixes.
+
+= 2.0.7 =
+Release date: 9th Aug 2017
+Fixed Load More JS issue after updating Divi to 3.0.67.
+
+= 2.0.6 =
+Release date: 26th July 2017
+Fixed Read More link when create posts with page builder.
+Minor CSS Fixes
+ 
+= 2.0.5 =
+Release date: 4th July 2017
+Fixed post excerpt displaying via page builder.
+Improved CSS
+ 
+= 2.0.4 =
+Release date: 30th June 2017
+Fix design settings for static CSS file generation system.
+
+= 2.0.3 =
+Release date: 16th June 2017
+Fix front end builder load issue.
+
+= 2.0.2 =
+Release date: 5th June 2017
+Made some fixes causing fatal error on theme change.
+
+= 2.0.1 =
+Release date: 1st June 2017
+CSS fix for Divi Columns.
+
+= 2.0.0 =
+Release date: 24th May 2017
+Added 3 new blog layouts.
+Added color picker to select individual category color selection.
+Added auto update functionality.
+Fixed default value initialization issue.
+Fixed specialty section CSS issues.
+
+= 1.0.1 =
+Release date: 23rd April 2017
+Fixed bug causing CSS issues in some browsers.
+
+= 1.0 =
+Release date: 22nd April 2017
+Initial Release

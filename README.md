@@ -1,2 +1,0 @@
-# nortest
-qobo project

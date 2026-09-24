@@ -1,0 +1,13 @@
+.htaccess
+license.txt
+local-xdebuginfo.php
+
+xmlrpc.php
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+wp-content/uploads
+
+wp-config.php
+wp-config-sample.php

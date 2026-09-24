@@ -160,3 +160,4 @@ function fast_certificate_check($result, $tag) {
 
     return $result;
 }
+

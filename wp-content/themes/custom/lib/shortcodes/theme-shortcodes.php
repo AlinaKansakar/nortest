@@ -120,6 +120,95 @@ function qobrix_user_documents_shortcode_function($args) {
 add_shortcode('qobrix_user_documents', 'qobrix_user_documents_shortcode_function');
 
 /**
+ * Files from the folders repeater on each of the user's documents.
+ *
+ * Example 1: [qobrix_user_folders]
+ *
+ * @param array $args The arguments.
+ * @return string field value or empty string on failure.
+ */
+function qobrix_user_folders_shortcode_function($args) {
+	if (!is_user_logged_in()) {
+		return '';
+	}
+
+	$args = shortcode_atts(
+		[
+			'title' => 'My Documents',
+		],
+		$args
+	);
+
+	$documents = [];
+
+	if (isset($_GET['project_id'])) {
+		$project_id = intval($_GET['project_id']);
+		$project = get_post($project_id);
+		$project_users = get_field('user', $project_id);
+
+		if ($project && in_array(get_current_user_id(), (array) $project_users)) {
+			$documents = qobrix_get_project_documents($project);
+		}
+	} else {
+		foreach (qobrix_get_user_projects() as $project) {
+			$documents = array_merge($documents, qobrix_get_project_documents($project));
+		}
+	}
+
+	$files = [];
+
+	foreach ($documents as $document) {
+		$folders = get_field('folders', $document->ID);
+
+		if (!$folders || !is_array($folders)) {
+			continue;
+		}
+
+		$department = get_field('department', $document->ID);
+		if (is_array($department)) {
+			$department = $department['label'] ?? '';
+		}
+		if (!$department) {
+			$department = get_post_meta($document->ID, 'department', true);
+		}
+
+		foreach ($folders as $folder) {
+			$file = $folder['file'] ?? null;
+			$file_url = '';
+
+			if (is_array($file) && !empty($file['url'])) {
+				$file_url = $file['url'];
+			} elseif (is_numeric($file)) {
+				$file_url = wp_get_attachment_url((int) $file);
+			}
+
+			if (!$file_url) {
+				continue;
+			}
+
+			$files[] = [
+				'file_name' => $folder['file_name'] ?? '',
+				'file_url' => $file_url,
+				'project_title' => $document->project_title ?? '',
+				'department' => $department ?: '-',
+				'added_on' => get_the_date('Y/m/d', $document->ID),
+			];
+		}
+	}
+
+	$args['files'] = $files;
+
+	return qobrix_get_template_html(
+		'qobrix-folders',
+		[
+			'atts' => $args,
+		]
+	);
+}
+
+add_shortcode('qobrix_user_folders', 'qobrix_user_folders_shortcode_function');
+
+/**
  * User profile shortcode
  *
  * Example 1: [qobrix_user_profile]

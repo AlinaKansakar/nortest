@@ -160,3 +160,63 @@ function fast_certificate_check($result, $tag) {
 
     return $result;
 }
+
+/**
+ * Department dropdown on the Documents list in wp-admin.
+ *
+ * @param string $post_type Current list post type.
+ */
+function nortest_document_department_filter( $post_type ) {
+	if ( 'document' !== $post_type || ! function_exists( 'acf_get_field' ) ) {
+		return;
+	}
+
+	$field = acf_get_field( 'field_65efe423ee07b' );
+	if ( empty( $field['choices'] ) || ! is_array( $field['choices'] ) ) {
+		return;
+	}
+
+	$selected = isset( $_GET['document_department'] ) ? sanitize_text_field( wp_unslash( $_GET['document_department'] ) ) : '';
+
+	echo '<select name="document_department" id="document_department">';
+	echo '<option value="">' . esc_html__( 'All Departments', 'nortest' ) . '</option>';
+	foreach ( $field['choices'] as $value => $label ) {
+		printf(
+			'<option value="%s"%s>%s</option>',
+			esc_attr( $value ),
+			selected( $selected, (string) $value, false ),
+			esc_html( $label )
+		);
+	}
+	echo '</select>';
+}
+add_action( 'restrict_manage_posts', 'nortest_document_department_filter' );
+
+/**
+ * Apply the Department filter on the Documents list.
+ *
+ * @param WP_Query $query Main admin query.
+ */
+function nortest_filter_documents_by_department( $query ) {
+	if ( ! is_admin() || ! $query->is_main_query() ) {
+		return;
+	}
+
+	global $pagenow;
+	if ( 'edit.php' !== $pagenow || 'document' !== $query->get( 'post_type' ) ) {
+		return;
+	}
+
+	if ( empty( $_GET['document_department'] ) ) {
+		return;
+	}
+
+	$meta_query   = $query->get( 'meta_query' );
+	$meta_query   = is_array( $meta_query ) ? $meta_query : array();
+	$meta_query[] = array(
+		'key'   => 'department',
+		'value' => sanitize_text_field( wp_unslash( $_GET['document_department'] ) ),
+	);
+	$query->set( 'meta_query', $meta_query );
+}
+add_action( 'pre_get_posts', 'nortest_filter_documents_by_department' );

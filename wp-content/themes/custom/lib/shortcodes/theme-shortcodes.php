@@ -222,6 +222,7 @@ function qobrix_get_user_document_rows() {
 				'project' => $document->project_title ?? '',
 				'department' => qobrix_get_document_department_label($document->ID),
 				'url' => add_query_arg('document-slug', $document->post_name, $base_url),
+				'addon_date' => qobrix_get_document_addon_date($document->ID),
 			];
 		}
 	}
@@ -259,6 +260,20 @@ function qobrix_get_document_folder_files($document_slug) {
 		return $files;
 	}
 
+	$project = get_field('project', $document->ID);
+	$project_title = '';
+
+	if ($project instanceof WP_Post) {
+		$project_title = $project->post_title;
+	} elseif (is_numeric($project)) {
+		$project_post = get_post((int) $project);
+		$project_title = $project_post instanceof WP_Post ? $project_post->post_title : '';
+	}
+
+	$document_title = $document->post_title;
+	$department = qobrix_get_document_department_label($document->ID);
+	$addon_date = qobrix_get_document_addon_date($document->ID);
+
 	foreach ($folders as $folder) {
 		if (!is_array($folder)) {
 			continue;
@@ -284,8 +299,12 @@ function qobrix_get_document_folder_files($document_slug) {
 		}
 
 		$files[] = [
+			'title' => $document_title,
+			'project' => $project_title,
+			'department' => $department,
 			'file_name' => $file_name,
 			'file_url' => $file_url,
+			'addon_date' => $addon_date,
 		];
 	}
 
@@ -321,6 +340,34 @@ function qobrix_user_can_access_document($document) {
 	$user_ids = array_map('intval', $project_users);
 
 	return in_array(get_current_user_id(), $user_ids, true);
+}
+
+/**
+ * Date shown as Addon Date. Uses the ACF addon_date field when set, otherwise the document publish date.
+ *
+ * @param int $document_id Document post ID.
+ * @return string
+ */
+function qobrix_get_document_addon_date($document_id) {
+	$date = get_field('addon_date', $document_id);
+
+	if (is_array($date)) {
+		$date = $date['date'] ?? '';
+	}
+
+	if (is_string($date) && $date !== '') {
+		$parsed = DateTime::createFromFormat('Ymd', $date);
+
+		if ($parsed instanceof DateTime) {
+			return $parsed->format('Y/m/d');
+		}
+
+		return $date;
+	}
+
+	$post_date = get_the_date('Y/m/d', $document_id);
+
+	return $post_date ? $post_date : '';
 }
 
 /**

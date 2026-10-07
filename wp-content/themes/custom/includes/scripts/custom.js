@@ -125,4 +125,22 @@ jQuery(document).ready(function ($) {
   $('#dataTable').DataTable({
     order: [], // Disables initial sorting
   });
+
+  $(document).on("click", ".form__password-toggle", function (e) {
+    e.preventDefault();
+    var $button = $(this);
+    var inputId = $button.attr("aria-controls");
+    var $input = inputId ? $("#" + inputId) : $button.siblings(".form__control");
+    var isVisible = $input.attr("type") === "text";
+
+    if (isVisible) {
+      $input.attr("type", "password");
+      $button.attr("aria-pressed", "false");
+      $button.attr("aria-label", "Show password");
+    } else {
+      $input.attr("type", "text");
+      $button.attr("aria-pressed", "true");
+      $button.attr("aria-label", "Hide password");
+    }
+  });
 });

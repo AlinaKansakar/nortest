@@ -423,3 +423,56 @@ div#login-success-msg {
 	}
 }
 /* End - Qobrix rotation clockwise */
+
+.qobrix_form .form__password {
+	position: relative;
+}
+
+.qobrix_form .form__password .form__control {
+	padding-right: 48px !important;
+}
+
+.qobrix_form .form__password-toggle {
+	position: absolute;
+	top: 50%;
+	right: 6px;
+	transform: translateY(-50%);
+	width: 36px;
+	height: 36px;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	cursor: pointer;
+	color: #666;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+	min-height: 0;
+	box-shadow: none;
+	appearance: none;
+}
+
+.qobrix_form .form__password-toggle:hover,
+.qobrix_form .form__password-toggle:focus {
+	background: transparent;
+	color: #333;
+}
+
+.qobrix_form .form__password-icon {
+	width: 22px;
+	height: 22px;
+	display: block;
+}
+
+.qobrix_form .form__password-icon--hide {
+	display: none;
+}
+
+.qobrix_form .form__password-toggle[aria-pressed="true"] .form__password-icon--show {
+	display: none;
+}
+
+.qobrix_form .form__password-toggle[aria-pressed="true"] .form__password-icon--hide {
+	display: block;
+}

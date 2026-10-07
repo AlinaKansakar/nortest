@@ -120,6 +120,46 @@ function qobrix_user_documents_shortcode_function($args) {
 add_shortcode('qobrix_user_documents', 'qobrix_user_documents_shortcode_function');
 
 /**
+ * Document list, or folder files for the document in the document-slug parameter.
+ *
+ * Example 1: [qobrix_user_folders]
+ *
+ * @param array $args The arguments.
+ * @return string field value or empty string on failure.
+ */
+function qobrix_user_folders_shortcode_function($args) {
+	if (!is_user_logged_in()) {
+		return '';
+	}
+
+	$args = shortcode_atts(
+		[
+			'title' => 'My Documents',
+		],
+		$args
+	);
+
+	$document_slug = isset($_GET['document-slug']) ? sanitize_title(wp_unslash($_GET['document-slug'])) : '';
+
+	if ($document_slug !== '') {
+		$args['view'] = 'files';
+		$args['files'] = qobrix_get_document_folder_files($document_slug);
+	} else {
+		$args['view'] = 'documents';
+		$args['documents'] = qobrix_get_user_document_rows();
+	}
+
+	return qobrix_get_template_html(
+		'qobrix-folders',
+		[
+			'atts' => $args,
+		]
+	);
+}
+
+add_shortcode('qobrix_user_folders', 'qobrix_user_folders_shortcode_function');
+
+/**
  * User profile shortcode
  *
  * Example 1: [qobrix_user_profile]
@@ -148,6 +188,207 @@ function qobrix_user_profile_shortcode_function($args) {
 }
 
 add_shortcode('qobrix_user_profile', 'qobrix_user_profile_shortcode_function');
+
+/**
+ * Document rows for the logged-in user's projects.
+ *
+ * @return array
+ */
+function qobrix_get_user_document_rows() {
+	$rows = [];
+	$page_id = get_queried_object_id();
+	$base_url = $page_id ? get_permalink($page_id) : '';
+
+	if (!$base_url) {
+		$base_url = home_url('/');
+	}
+
+	$projects = qobrix_get_user_projects();
+
+	if (!is_array($projects)) {
+		return $rows;
+	}
+
+	foreach ($projects as $project) {
+		$documents = qobrix_get_project_documents($project);
+
+		if (!is_array($documents)) {
+			continue;
+		}
+
+		foreach ($documents as $document) {
+			$rows[] = [
+				'title' => $document->post_title,
+				'project' => $document->project_title ?? '',
+				'department' => qobrix_get_document_department_label($document->ID),
+				'url' => add_query_arg('document-slug', $document->post_name, $base_url),
+				'addon_date' => qobrix_get_document_addon_date($document->ID),
+			];
+		}
+	}
+
+	return $rows;
+}
+
+/**
+ * Folder files for a document slug the current user can access.
+ *
+ * @param string $document_slug Document post slug.
+ * @return array
+ */
+function qobrix_get_document_folder_files($document_slug) {
+	$files = [];
+
+	$documents = get_posts(
+		[
+			'post_type' => 'document',
+			'name' => $document_slug,
+			'post_status' => 'publish',
+			'posts_per_page' => 1,
+		]
+	);
+
+	$document = $documents[0] ?? null;
+
+	if (!$document || !qobrix_user_can_access_document($document)) {
+		return $files;
+	}
+
+	$folders = get_field('folders', $document->ID);
+
+	if (!is_array($folders)) {
+		return $files;
+	}
+
+	$project = get_field('project', $document->ID);
+	$project_title = '';
+
+	if ($project instanceof WP_Post) {
+		$project_title = $project->post_title;
+	} elseif (is_numeric($project)) {
+		$project_post = get_post((int) $project);
+		$project_title = $project_post instanceof WP_Post ? $project_post->post_title : '';
+	}
+
+	$document_title = $document->post_title;
+	$department = qobrix_get_document_department_label($document->ID);
+	$addon_date = qobrix_get_document_addon_date($document->ID);
+
+	foreach ($folders as $folder) {
+		if (!is_array($folder)) {
+			continue;
+		}
+
+		$file = $folder['file'] ?? null;
+		$file_url = '';
+		$attachment_name = '';
+
+		if (is_array($file)) {
+			$file_url = isset($file['url']) ? (string) $file['url'] : '';
+			$attachment_name = isset($file['filename']) ? (string) $file['filename'] : '';
+		} elseif (is_numeric($file)) {
+			$file_url = wp_get_attachment_url((int) $file) ?: '';
+		} elseif (is_string($file)) {
+			$file_url = $file;
+		}
+
+		$file_name = isset($folder['file_name']) ? (string) $folder['file_name'] : '';
+
+		if ($file_name === '') {
+			$file_name = $attachment_name;
+		}
+
+		$files[] = [
+			'title' => $document_title,
+			'project' => $project_title,
+			'department' => $department,
+			'file_name' => $file_name,
+			'file_url' => $file_url,
+			'addon_date' => $addon_date,
+		];
+	}
+
+	return $files;
+}
+
+/**
+ * Whether the current user is assigned to the document's project.
+ *
+ * @param WP_Post $document Document post.
+ * @return bool
+ */
+function qobrix_user_can_access_document($document) {
+	$project = get_field('project', $document->ID);
+	$project_id = 0;
+
+	if ($project instanceof WP_Post) {
+		$project_id = $project->ID;
+	} elseif (is_numeric($project)) {
+		$project_id = (int) $project;
+	}
+
+	if (!$project_id) {
+		return false;
+	}
+
+	$project_users = get_field('user', $project_id);
+
+	if (!is_array($project_users)) {
+		return false;
+	}
+
+	$user_ids = array_map('intval', $project_users);
+
+	return in_array(get_current_user_id(), $user_ids, true);
+}
+
+/**
+ * Date shown as Addon Date. Uses the ACF addon_date field when set, otherwise the document publish date.
+ *
+ * @param int $document_id Document post ID.
+ * @return string
+ */
+function qobrix_get_document_addon_date($document_id) {
+	$date = get_field('addon_date', $document_id);
+
+	if (is_array($date)) {
+		$date = $date['date'] ?? '';
+	}
+
+	if (is_string($date) && $date !== '') {
+		$parsed = DateTime::createFromFormat('Ymd', $date);
+
+		if ($parsed instanceof DateTime) {
+			return $parsed->format('Y/m/d');
+		}
+
+		return $date;
+	}
+
+	$post_date = get_the_date('Y/m/d', $document_id);
+
+	return $post_date ? $post_date : '';
+}
+
+/**
+ * Department label for a document.
+ *
+ * @param int $document_id Document post ID.
+ * @return string
+ */
+function qobrix_get_document_department_label($document_id) {
+	$department = get_field('department', $document_id);
+
+	if (is_array($department)) {
+		$department = $department['label'] ?? $department['value'] ?? '';
+	}
+
+	if (!is_scalar($department)) {
+		return '';
+	}
+
+	return (string) $department;
+}
 
 /**
  * Get Project Documents.

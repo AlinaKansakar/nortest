@@ -141,8 +141,11 @@ function fast_certificate_check($result, $tag) {
     );
 
     $query = new WP_Query($args);
+    $certificate_id = $query->have_posts() ? (int) $query->posts[0] : 0;
+    $expiration = $certificate_id ? get_post_meta($certificate_id, 'expiration_date', true) : '';
+    $is_expired = $certificate_id && '' !== $expiration && $expiration < current_time('Ymd');
 
-    if ($query->have_posts()) {        
+    if ($certificate_id && ! $is_expired) {
         add_filter('wpcf7_display_message', function($message, $status) {
     		return "This certificate is valid.";
 		}, 10, 2); 
@@ -152,6 +155,16 @@ function fast_certificate_check($result, $tag) {
         add_action('wp_footer', function() {
             echo '<style>.wpcf7-not-valid-tip { color: #008000 !important; }</style>';
         });
+
+    } elseif ($is_expired) {
+        add_filter('wpcf7_display_message', function($message, $status) {
+            return "The report is invalid or expired.";
+        }, 10, 2);
+        add_filter('wpcf7_feedback_response', function($response) {
+            $response['status'] = 'failed';
+            return $response;
+        });
+        $result->invalidate($tag, "The report is invalid or expired.");
 
     } else {
         $result->invalidate($tag, "No valid certificate found with those details.");

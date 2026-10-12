@@ -68,7 +68,7 @@ $view = $atts['view'] ?? 'documents';
 					<td><?php echo esc_html(($document['department'] ?? '') !== '' ? $document['department'] : '-'); ?></td>
 					<td>
 						<?php if (!empty($document['url'])) : ?>
-							<a href="<?php echo esc_url($document['url']); ?>">View Document</a>
+							<a href="<?php echo esc_url($document['url']); ?>">View Documents</a>
 						<?php else : ?>
 							<?php echo esc_html('-'); ?>
 						<?php endif; ?>

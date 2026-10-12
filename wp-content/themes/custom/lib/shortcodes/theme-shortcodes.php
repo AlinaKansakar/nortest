@@ -56,6 +56,8 @@ function qobrix_user_projects_shortcode_function($args) {
 		}
 	}
 
+	$document_folder = get_page_by_path('document-folder');
+	$args['document_folder_url'] = $document_folder ? get_permalink($document_folder) : home_url('/document-folder/');
 	$args['projects'] = $projects;
 
 	return qobrix_get_template_html(
@@ -140,13 +142,14 @@ function qobrix_user_folders_shortcode_function($args) {
 	);
 
 	$document_slug = isset($_GET['document-slug']) ? sanitize_title(wp_unslash($_GET['document-slug'])) : '';
+	$project_id = (isset($_GET['project_id']) && is_scalar($_GET['project_id'])) ? absint(wp_unslash($_GET['project_id'])) : 0;
 
 	if ($document_slug !== '') {
 		$args['view'] = 'files';
 		$args['files'] = qobrix_get_document_folder_files($document_slug);
 	} else {
 		$args['view'] = 'documents';
-		$args['documents'] = qobrix_get_user_document_rows();
+		$args['documents'] = qobrix_get_user_document_rows($project_id);
 	}
 
 	return qobrix_get_template_html(
@@ -192,9 +195,10 @@ add_shortcode('qobrix_user_profile', 'qobrix_user_profile_shortcode_function');
 /**
  * Document rows for the logged-in user's projects.
  *
+ * @param int $project_id Limit rows to this project when the current user can access it.
  * @return array
  */
-function qobrix_get_user_document_rows() {
+function qobrix_get_user_document_rows($project_id = 0) {
 	$rows = [];
 	$page_id = get_queried_object_id();
 	$base_url = $page_id ? get_permalink($page_id) : '';
@@ -203,7 +207,13 @@ function qobrix_get_user_document_rows() {
 		$base_url = home_url('/');
 	}
 
-	$projects = qobrix_get_user_projects();
+	if ($project_id) {
+		$project = get_post($project_id);
+		$project_users = ($project instanceof WP_Post && 'project' === $project->post_type) ? get_field('user', $project->ID) : [];
+		$projects = (is_array($project_users) && in_array(get_current_user_id(), array_map('intval', $project_users), true)) ? [$project] : [];
+	} else {
+		$projects = qobrix_get_user_projects();
+	}
 
 	if (!is_array($projects)) {
 		return $rows;

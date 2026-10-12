@@ -22,7 +22,7 @@
 					<td>
 						<?php echo esc_attr($project->documents_count); ?>
 						<?php if ($project->documents_count > 0) : ?>
-							<a href="<?php echo esc_url(home_url('/my-documents/?project_id=' . $project->ID)); ?>">View</a>
+							<a href="<?php echo esc_url(add_query_arg('project_id', $project->ID, $atts['document_folder_url'])); ?>">View</a>
 						<?php endif; ?>
 					</td>
 				</tr>
